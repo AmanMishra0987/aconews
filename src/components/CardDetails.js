@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const Card = ({ data = [] }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4; // Number of items to display per page
+    const itemsPerPage = 4; 
 
-    // Calculate the index of the first and last items on the current page
+   
+    useEffect(() => {
+        console.log("Card data:", data); 
+    }, [data]);
+
+   
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-    // Slice the data to get only the items for the current page
+    
     const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
 
-    // Function to handle page change
+    
     const handlePageChange = (direction) => {
         if (direction === 'next' && currentPage < Math.ceil(data.length / itemsPerPage)) {
             setCurrentPage(currentPage + 1);
@@ -23,16 +27,16 @@ const Card = ({ data = [] }) => {
         }
     };
 
-    // Calculate the total number of pages
+    
     const totalPages = Math.ceil(data.length / itemsPerPage);
 
     return (
         <div className='cardContainer'>
             {currentData.length > 0 ? (
                 currentData.map((curItem, index) => (
-                    curItem.urlToImage && ( // Only render if the image exists
+                    curItem.image && ( 
                         <div className='card' key={index}>
-                            <img src={curItem.urlToImage} alt={curItem.title} />
+                            <img src={curItem.image} alt={curItem.title} />
                             <div className='content'>
                                 <a className='title' onClick={() => window.open(curItem.url)}>{curItem.title}</a>
                                 <p>{curItem.description}</p>
@@ -42,10 +46,10 @@ const Card = ({ data = [] }) => {
                     )
                 ))
             ) : (
-                <p>No data available</p> // Show a message if no data is available
+                <p>No data available</p> 
             )}
 
-            {/* Pagination Controls */}
+            
             <div className="pagination">
                 <button
                     className="btn btn-primary me-2"
