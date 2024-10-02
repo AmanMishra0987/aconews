@@ -6,10 +6,10 @@ const NewsApp = () => {
 
     const [search,setSearch] = useState("india");
     const [newsData,setNewsData] = useState([]);
-    const API_KEY = 'd5b6de93e05cabaf9989be51a44690ef';
+    const API_KEY = '1cd65f730c264f8984b4dc5498eddc23';
     
     const getData = async()=>{
-        const response = await fetch(`https://gnews.io/api/v4/search?q=${search}&apikey=${API_KEY}`);
+        const response = await fetch(`https://newsapi.org/v2/everything?q=${search}&apiKey=${API_KEY}`);
         const jsonData = await response.json();
         console.log(jsonData.articles);
         setNewsData(jsonData.articles);

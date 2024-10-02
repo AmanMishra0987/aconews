@@ -34,9 +34,10 @@ const Card = ({ data = [] }) => {
         <div className='cardContainer'>
             {currentData.length > 0 ? (
                 currentData.map((curItem, index) => (
-                    curItem.image && ( 
+                    curItem.urlToImage && ( 
                         <div className='card' key={index}>
-                            <img src={curItem.image} alt={curItem.title} />
+                            <img src={curItem.urlToImage} alt={curItem.title} />
+                            <p style={{marginTop: "20px" , borderBottom: "2px solid black"}} ><b style={{color:"red"}}>Author</b> : {curItem.author}</p>
                             <div className='content'>
                                 <a className='title' onClick={() => window.open(curItem.url)}>{curItem.title}</a>
                                 <p>{curItem.description}</p>
